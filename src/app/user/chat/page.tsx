@@ -3,15 +3,26 @@ import { useEffect, useState } from "react"
 import axios from 'axios';
 import { useRef } from 'react';
 import { string } from "zod";
-
+type ChatVal = {
+  user:string,
+  question:string,
+  type:string
+}
 export default function Page(){
+    const [question,setQuestion] = useState()
     const [chat,setChat] = useState('')
-    const [chatList,setChatList] = useState([chat])
+    const [chatList,setChatList] = useState<any>([])
     const messagesEndRef = useRef<null | HTMLDivElement>(null)
-
     const sendChat = async()=>{
         // const { pipeline } = await import("@xenova/transformers");
-        setChatList([...chatList,chat]);
+        const val = {user:'me',chat:chat,type:'question'}
+        setChatList([...chatList,val]);
+        const res = await axios.post('/api/llm/chat',{question:chat});
+        console.log(res.data.data)
+        const ans = {user:'baran',chat:res.data.data,type:'ans'}
+        setChatList([...chatList,ans]);
+        
+
 
     }
 
@@ -38,12 +49,22 @@ export default function Page(){
         Chat messages
         
         {
-          chatList.map((item,index)=>{
-              return (
-                <div className="w-auto rounded-lg mb-auto  bg-green-300 m-2 p-2" key={index}>
-                {item}
-                </div>
-              )
+          chatList.map((item:any,index:any)=>{
+              if(item.type == 'question'){
+                return (
+                  <div className="w-auto rounded-lg ml-auto  bg-green-100 m-2 p-2" key={index}>
+                  {item.chat}
+                  </div>
+                )
+              }else{
+                return (
+                  <div className="w-auto rounded-lg mr-auto  bg-green-300 m-2 p-2" key={index}>
+                  <span className="text-sm mr-5">{item.user}:</span>
+                  <div>{item.chat}</div>
+                  </div>
+                )
+              }
+              
           })
         }
         <div style={{ marginBottom: 100 }} ref={messagesEndRef} />

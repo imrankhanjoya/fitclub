@@ -26,3 +26,11 @@ body {
     text-wrap: balance;
   }
 }
+
+pre {
+  word-wrap: normal;
+  font-family: monospace;
+  border-radius: 0 !important;
+  overflow-x: auto;
+
+}
