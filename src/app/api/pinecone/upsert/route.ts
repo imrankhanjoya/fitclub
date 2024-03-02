@@ -19,14 +19,17 @@ export  async function POST(req:NextRequest,res:NextResponse<Data>) {
   const session = await getServerSession();
   console.log(session)
   const postvalue = await req.json()
-
-  let validationRule =  await infoShema.safeParseAsync(postvalue)
+ let validationRule =  await infoShema.safeParseAsync(postvalue)
   if(validationRule.success == false){
     return NextResponse.json({ data:validationRule.error.issues[0].message, message: "Error in post request" })
   }
+  let urlValue: string =  validationRule.data.url!
+  let image: string =  validationRule.data.image!
+
   //console.log(validationRule.data.description)
   const splitter = new RecursiveCharacterTextSplitter({chunkSize: 200,chunkOverlap:60,});
   const valsplit = await splitter.createDocuments([validationRule.data.description]);
+
   const extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
   //start namespace for user
   const indexDoc = await initpine("barankhan")
@@ -38,12 +41,11 @@ export  async function POST(req:NextRequest,res:NextResponse<Data>) {
       content: { $eq: item.pageContent },
       user: { $eq:"barankhan" }
     });
-    
     const val = await indexDoc.upsert([{id:uuidv4(),values: Array.from(output.data),
       metadata: {
         content:item.pageContent,
-        url:validationRule.data.url,
-        image:validationRule.data.image,
+        url:urlValue, 
+        image:image,
         user:"barankhan",
       }
     }]).then(()=>{

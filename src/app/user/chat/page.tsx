@@ -2,11 +2,12 @@
 import { useEffect, useState } from "react"
 import axios from 'axios';
 import { useRef } from 'react';
+import { string } from "zod";
 
 export default function Page(){
     const [chat,setChat] = useState('')
-    const [chatList,setChatList] = useState([])
-    const messagesEndRef = useRef(null)
+    const [chatList,setChatList] = useState([chat])
+    const messagesEndRef = useRef<null | HTMLDivElement>(null)
 
     const sendChat = async()=>{
         // const { pipeline } = await import("@xenova/transformers");
