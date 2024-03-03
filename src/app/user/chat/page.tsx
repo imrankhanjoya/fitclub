@@ -83,6 +83,10 @@ export default function Page(){
         </div>
         
       </div>
+      <div className="mt-10">
+
+      <p>Write cover letter for blockchian job</p>
+      </div>
     </div>
   </div>
 </section>
