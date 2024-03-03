@@ -32,7 +32,6 @@ export  async function POST(req:NextRequest,res:NextResponse<Data>) {
   })
 
   //return Response.json({ data:chatHistoryDoc, message: "" })
-//"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"
 console.log(process.env.OPEN_AI)
   const llm = new ChatOpenAI({ openAIApiKey:"sk-"+process.env.OPEN_ST+process.env.EN ,modelName:'gpt-4'})
   const questionuser = postvalue.question
