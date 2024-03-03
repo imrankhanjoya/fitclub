@@ -2,7 +2,7 @@
   "name": "fitclub",
   "version": "0.1.0",
   "private": true,
-  "strict":false,
+  "strict": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@huggingface/inference": "^2.6.4",
     "@pinecone-database/pinecone": "^2.0.1",
     "@xenova/transformers": "^2.15.1",
     "axios": "^1.6.7",
