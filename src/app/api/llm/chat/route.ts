@@ -33,7 +33,7 @@ export  async function POST(req:NextRequest,res:NextResponse<Data>) {
 
   //return Response.json({ data:chatHistoryDoc, message: "" })
 
-  const llm = new ChatOpenAI({ openAIApiKey:process.env.OPEN_AI ,modelName:'gpt-4'})
+  const llm = new ChatOpenAI({ openAIApiKey:process.env.OPEN_ST ,modelName:'gpt-4'})
   const questionuser = postvalue.question
 
   const standaloneTemplate = "Generate a standalone question which is based on the new question. Just create the standalone: {question} without commentary. question:"
