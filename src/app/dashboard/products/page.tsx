@@ -21,22 +21,24 @@ export default function Page() {
     return (
     <>
     <p>Products Page</p>
+    <div className="grid grid-cols-4 gap-4">
     {
       products.map((item:any,index:any)=>{
         console.log(item)
         return (
-          <div key={index} className="border-2 rounded-md flex flex-row space-x-2" >
-            <div><img src={item.logo} className="w-[50px] h-[50px]" /></div>
+          <div key={index} className="border-2 rounded-md flex p-2 flex-row space-x-2" >
+            <div><img src={item.logo} className="w-[100px] " /></div>
             <div>
             <div>{item.title}</div>
-            <div className="text-sm">{item.description}</div>
-            <div>{item.category}</div>
-            <div>{item.website}</div>
+            <div className="text-[10px]">{item.description}</div>
+            <div className="text-sm font-bold">{item.category}</div>
+            <div><a href={item.website} className="text-sm text-blue-500">{item.website.substring(0,30)}</a></div>
             </div>
           </div>
         )
       })
     }
+    </div>
     </>
     )
   }
