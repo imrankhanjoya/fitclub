@@ -30,7 +30,7 @@ export default function Page() {
             <div><img src={item.logo} className="w-[100px] " /></div>
             <div>
             <div>{item.title}</div>
-            <div className="text-[10px]">{item.description}</div>
+            <div className="text-[10px]">{item.description.substring(0,200)}</div>
             <div className="text-sm font-bold">{item.category}</div>
             <div><a href={item.website} className="text-sm text-blue-500">{item.website.substring(0,30)}</a></div>
             </div>
