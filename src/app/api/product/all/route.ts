@@ -23,7 +23,7 @@ export async function POST(req:NextRequest,res:NextResponse<Data>) {
     // const data = postvalue
     // console.log(data)
         
-    let products = await Product.find({})
+    let products = await Product.find({}).limit(0,100)
     if(!products){
       return NextResponse.json({ data: false, message: "Website not found" })
     }else{
