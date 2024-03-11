@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation'
 
 export default function Page() {
   const searchParams = useSearchParams()
-  let token = searchParams.get('token') ? "fdd37c1c46fb7a8db06bd3ac69460517" :searchParams.get('token') 
+  const token = searchParams.get('token')
 
     const [products,setProducts] = useState<any>([])
     const [description,setDescription] = useState('')
