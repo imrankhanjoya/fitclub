@@ -1,0 +1,82 @@
+"use client"
+import { useEffect, useState } from "react";
+import axios from 'axios';
+import { useSearchParams } from 'next/navigation'
+
+export default function Page() {
+  const searchParams = useSearchParams()
+  const token = searchParams.get('token')
+
+    const [products,setProducts] = useState<any>([])
+    const [loaded,setLoaded] = useState(false)
+
+    const getProducts = async()=>{
+      const res = await axios.post('/api/product/detail',{token:token});
+      console.log(res.data.data)
+      setLoaded(true)
+      // setProducts([...products,res.data.data]);
+      setProducts(res.data.data);
+    }
+
+    useEffect(()=>{
+      if(loaded == false)
+        getProducts()
+    },[loaded])
+
+    return (
+    <>
+    <p>Products Detail Page</p>
+    {loaded && <div className="flex flex-col">
+      <div>
+        <img src={products.product.logo}/>
+      <h2>{products.product.year}{products.product.title}</h2>
+      <p>{products.product.website}</p>
+      <p>{products.product.description}</p>
+      <p>{products.product.category}</p>
+      {products.prodcutdetail  && <p className="text-sm">{products.prodcutdetail.description}</p>}
+      </div>
+      <div>
+        <h2>Faq</h2>
+      {
+      products.prodcutdetail && products.prodcutdetail.faq.map((item:any,index:any)=>{
+        return (
+          <div key={index}>
+            <p className="text-sm font-bold">{item.title}</p>
+            <p className="text-sm ">{item.description}</p>
+          </div>
+        )
+      })
+      }
+      </div>
+      <h2>Pros & Cons</h2>
+
+      <div className="flex flex-row">
+        <div className="w-1/2">
+      {
+      products.prodcutdetail && products.prodcutdetail.pros.map((item:any,index:any)=>{
+        return (
+          <div key={index}>
+            <p className="text-sm font-bold">{item}</p>
+          </div>
+        )
+      })
+      }
+      </div>
+      <div className="w-1/2">
+      {
+      products.prodcutdetail && products.prodcutdetail.cons.map((item:any,index:any)=>{
+        return (
+          <div key={index}>
+            <p className="text-sm font-bold">{item}</p>
+          </div>
+        )
+      })
+      }
+      </div>
+      </div>
+    </div>}
+    </>
+    )
+  }
+
+

@@ -27,9 +27,9 @@ export default function Page() {
         console.log(item)
         return (
           <div key={index} className="border-2 rounded-md flex p-2 flex-row space-x-2" >
-            <div><img src={item.logo} className="w-[100px] " /></div>
+            {item.logo !='' && <div><img src={item.logo} className="w-[100px] " /></div>}
             <div>
-            <div>{item.title}</div>
+            <div><a href={"products/detail?token="+item.token}>{item.title}</a></div>
             <div className="text-[10px]">{item.description}</div>
             <div className="text-sm font-bold">{item.category}</div>
             <div><a href={item.website} className="text-sm text-blue-500">{item.website.substring(0,30)}</a></div>
