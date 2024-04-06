@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 export const metadata: Metadata = {
   title: "Social network to find Buy, sell, work, hire, rent, share, meet, learn, serve, fall in love, save the world, and build network",
   description: "Social netowrk portal to help find Buy, sell, work, hire, rent, share, meet, learn, serve, fall in love, save the world with your closed networkd.",
@@ -45,9 +46,15 @@ export default function Home() {
 
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-3/4 lg:mb-0 lg:grid-cols-3 lg:text-left">
         
-      <div className="rounded-full w-64 h-64 text-lg font-bold bg-red-400 flex items-center justify-center">Thailand</div>     
-      <div className="rounded-full w-64 h-64 text-lg font-bold bg-blue-400 flex items-center justify-center">Saudi Arabia</div>     
-      <div className="rounded-full w-64 h-64 text-lg font-bold bg-yellow-400 flex items-center justify-center">India</div>     
+      <div className="rounded-full w-64 h-64 text-lg font-bold bg-red-400 flex items-center justify-center">
+        <Link href={"/thailand"} >Thailand</Link>
+      </div>     
+      <div className="rounded-full w-64 h-64 text-lg font-bold bg-green-400 flex items-center justify-center">
+      <Link href={"/saudi-arabia"} >Saudi Arabia</Link>
+      </div>     
+      <div className="rounded-full w-64 h-64 text-lg font-bold bg-orange-400 flex items-center justify-center">
+      <Link href={"/india"} >India</Link>
+      </div>     
 
       </div>
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
