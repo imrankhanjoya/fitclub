@@ -23,7 +23,7 @@ export async function POST(req:NextRequest,res:NextResponse<Data>) {
     let pinfo = await Productinfo.find({}).select({product_token:1,_id:0})
     console.log(JSON.stringify(pinfo))
     if(!pinfo){
-      let processIds = await Product.find({}).select({source:1,website:1,token:1,_id:0}).limit(1000)
+      let processIds = await Product.find({}).select({source:1,website:1,token:1,_id:0}).limit(10000)
       return NextResponse.json({ data:processIds, message: "Product Exist in system" })
     }else{
       let pin:any = []
