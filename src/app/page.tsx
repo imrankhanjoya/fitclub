@@ -2,10 +2,15 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 export const metadata: Metadata = {
-  title: "Social network to find Buy, sell, work, hire, rent, share, meet, learn, serve, fall in love, save the world, and build network",
-  description: "Social netowrk portal to help find Buy, sell, work, hire, rent, share, meet, learn, serve, fall in love, save the world with your closed networkd.",
+  title: "Social network to find Buy, sell, work, hire, rent, share, meet in Thailand, India, Indonesia and Saudi Arabia",
+  description: "Social network portal to help find Buy, sell, work, hire, rent, share, meet, learn, serve, fall in love, save the world with your closed network.",
 };
 export default function Home() {
+  const countires = [{"name":"India","slug":"india","color":"bg-orange-400"}
+  ,{"name":"Thailand","slug":"thailand","color":"bg-blue-400"}
+  ,{"name":"Saudi Arabia","slug":"saudi-arabia","color":"bg-green-400"}
+  ,{"name":"Indonesia","slug":"indonesia","color":"bg-red-400"}
+]
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -44,17 +49,16 @@ export default function Home() {
         />
       </div>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-3/4 lg:mb-0 lg:grid-cols-3 lg:text-left">
-        
-      <div className="rounded-full w-64 h-64 text-lg font-bold bg-red-400 flex items-center justify-center">
-        <Link href={"/thailand"} >Thailand</Link>
-      </div>     
-      <div className="rounded-full w-64 h-64 text-lg font-bold bg-green-400 flex items-center justify-center">
-      <Link href={"/saudi-arabia"} >Saudi Arabia</Link>
-      </div>     
-      <div className="rounded-full w-64 h-64 text-lg font-bold bg-orange-400 flex items-center justify-center">
-      <Link href={"/india"} >India</Link>
-      </div>     
+      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-3/4 lg:mb-0 lg:grid-cols-4 lg:text-left">
+      {
+        countires.map((item,index)=>{
+          return (
+            <div key={index} className={"rounded-full w-36 h-36 text-lg font-bold flex items-center justify-center "+item.color}>
+              <Link href={"/"+item.slug} >{item.name}</Link>
+            </div>
+          )
+        })
+      }  
 
       </div>
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
