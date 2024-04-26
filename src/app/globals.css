@@ -34,3 +34,7 @@ pre {
   overflow-x: auto;
 
 }
+.title{
+  font-weight: bold;
+  padding-block: 5px;
+}

@@ -32,8 +32,9 @@ export default function Page({ params }:Props) {
     if(country== "thailand" || country== "saudi-arabia"){
     return (
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-    
+      <div className="z-10 max-w-5xl w-full items-center flex-col justify-between font-mono text-sm lg:flex">
+      <Link href={country+"/post/create"} className="bg-gray-300 rounded-lg px-2 border-2 border-gray-500 ml-auto">+Post</Link>  
+
       {params.country == "thailand" && <Thhero></Thhero>}
       {params.country == "saudi-arabia" && <Sahero></Sahero>}
 
@@ -43,9 +44,7 @@ export default function Page({ params }:Props) {
       return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-      
         <Coming></Coming>
-  
         </div>
       </main>)
     }
