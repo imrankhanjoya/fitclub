@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import axios from 'axios';
 import { ChatConversationalAgentOutputParser } from "langchain/agents";
 import ipLocation from "iplocation"
-
+import postSchema from "@/app/lib/schema/postSchema";
 
 
 
@@ -20,8 +20,10 @@ export default function Page() {
   const [modelist,setModelist] = useState(['url','telegram','whatsapp','mobile','line','wechat','instagram'])
   const [category, setCategory] = useState('')
   const [categorylist, setCategorylist] = useState(["sell", "job", "housing", "business", "friends", "childcare", "learning", "club", "resturent", "services"])
-  const [url, setUrl] = useState('')
+  const [mode, setMode] = useState('')
+  const [modevalue, setModevalue] = useState('')
   const [image, setImage] = useState('')
+  const [error, setError] = useState('')
 
   function getIPFromAmazon() {
     const response = axios.get('https://ipapi.co/json/').then((res)=>{
@@ -66,6 +68,14 @@ export default function Page() {
     });
   }
   const getCategory = async () => {
+    setError("")
+    const validationRule =  await postSchema.safeParseAsync({description,country,city,region,address,mode})
+    if(validationRule.success == false){
+      setError(validationRule.error.issues[0].message)
+      return
+    }
+
+
     await query({ inputs: description, parameters: { candidate_labels: categorylist } }).then((response) => {
       const res = response;
       setCategory(res.labels[0])
@@ -82,7 +92,8 @@ export default function Page() {
     <main>
       {description}
       {image}
-      {url}
+      {mode}
+      {error}
       <section className="text-gray-600 body-font relative">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-col text-center w-full mb-12">
@@ -91,19 +102,19 @@ export default function Page() {
           </div>
           <div className="flex flex-row text-center w-full mb-1 ">
             <div className="flex lg:flex-row flex-col w-full">
-            <input className={inputClass} onChange={(e)=>{setAddress(e.target.value)}} value={address} />
-            <input className={inputClass} onChange={(e)=>{setRegion(e.target.value)}} value={region} />
+            <input placeholder="Address line" className={inputClass} onChange={(e)=>{setAddress(e.target.value)}} value={address} />
+            <input placeholder="Region" className={inputClass} onChange={(e)=>{setRegion(e.target.value)}} value={region} />
             </div>
             <div className="flex lg:flex-row flex-col w-full">
-            <input className={inputClass} onChange={(e)=>{setCity(e.target.value)}} value={city} />
-            <input className={inputClass} onChange={(e)=>{setCountry(e.target.value)}} value={country} />
+            <input placeholder="City" className={inputClass} onChange={(e)=>{setCity(e.target.value)}} value={city} />
+            <input placeholder="Country" className={inputClass} onChange={(e)=>{setCountry(e.target.value)}} value={country} />
             </div>
           </div>
           <div className="flex flex-col text-center w-full mb-1">
-            <textarea placeholder="Post your requirment" className={inputClass} spellCheck="true" lang="en" onChange={(e) => { setDescription(e.target.value) }}></textarea>
+            <textarea placeholder="Post your requirment" className={inputClass} rows={5} spellCheck="true" lang="en" onChange={(e) => { setDescription(e.target.value) }}></textarea>
           </div>
           <div className="flex flex-row text-center w-full mb-1">
-            <select className={inputClass}>
+            <select className={inputClass} onChange={(e)=>setMode(e.target.value)}>
               <option>Select where to reach you</option>
             {
               modelist.map((item,index)=>{
@@ -113,7 +124,7 @@ export default function Page() {
               })
             }
             </select>
-            <input className={inputClass} onChange={(e)=>{setAddress(e.target.value)}} value={address} />
+            <input placeholder="Required value" className={inputClass} onChange={(e)=>{setModevalue(e.target.value)}} value={modevalue} />
 
           </div>
             <button className={buttonClass} onClick={getCorrect}>Submit</button>
