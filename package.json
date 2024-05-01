@@ -14,6 +14,7 @@
     "@pinecone-database/pinecone": "^2.0.1",
     "@xenova/transformers": "^2.15.1",
     "axios": "^1.6.7",
+    "iplocation": "^7.2.0",
     "langchain": "^0.1.25",
     "md5": "^2.3.0",
     "mongodb": "^6.4.0",
@@ -22,6 +23,7 @@
     "next-auth": "^4.24.6",
     "react": "^18",
     "react-dom": "^18",
+    "react-ipgeolocation": "^1.4.0",
     "uuid": "^9.0.1",
     "zod": "^3.22.4"
   },
