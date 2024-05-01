@@ -103,7 +103,7 @@ export default function Page() {
               <option>Select where to reach you</option>
             {
               modelist.map((item,index)=>{
-                return (<option value={item}>
+                return (<option value={item} key={index}>
                   {item}
                 </option>)
               })
