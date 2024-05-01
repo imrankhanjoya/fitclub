@@ -89,11 +89,15 @@ export default function Page() {
             <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Create Post</h1>
             <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Tell us how we can help you.</p>
           </div>
-          <div className="flex flex-row text-center w-full mb-1">
+          <div className="flex flex-row text-center w-full mb-1 ">
+            <div className="flex lg:flex-row flex-col w-full">
             <input className={inputClass} onChange={(e)=>{setAddress(e.target.value)}} value={address} />
             <input className={inputClass} onChange={(e)=>{setRegion(e.target.value)}} value={region} />
+            </div>
+            <div className="flex lg:flex-row flex-col w-full">
             <input className={inputClass} onChange={(e)=>{setCity(e.target.value)}} value={city} />
             <input className={inputClass} onChange={(e)=>{setCountry(e.target.value)}} value={country} />
+            </div>
           </div>
           <div className="flex flex-col text-center w-full mb-1">
             <textarea placeholder="Post your requirment" className={inputClass} spellCheck="true" lang="en" onChange={(e) => { setDescription(e.target.value) }}></textarea>
