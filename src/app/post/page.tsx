@@ -5,6 +5,7 @@ import axios from 'axios';
 import {categorylist,modelist} from "@/app/lib/fields"
 
 export default function Page(){
+    const [step,setStep] = useState('one')
     const [category,setCategory] = useState('')
     const [description,setDescription] = useState('')
     const [url,setUrl] = useState('')
@@ -13,7 +14,9 @@ export default function Page(){
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [region, setRegion] = useState('')
-  
+    const [mode, setMode] = useState('')
+    const [modevalue, setModevalue] = useState('')
+
     
     const generate_embbed = async()=>{
         // const { pipeline } = await import("@xenova/transformers");
@@ -25,12 +28,18 @@ export default function Page(){
 
     function getIPFromAmazon() {
     const response = axios.get('https://ipapi.co/json/').then((res)=>{
-      console.log(res.data)
       setCountry(res.data.country_name)
       setRegion(res.data.region)
       setCity(res.data.city)
     });
 
+    }
+    const setCategoryVal = (cat:any)=>{
+      setCategory(cat)
+      setStep("two")
+    }
+    const setAddressVal = ()=>{
+      setStep("three")
     }
 
     useEffect(()=>{
@@ -45,7 +54,8 @@ export default function Page(){
             
 <section className="text-gray-600 body-font relative">
   <div className="container px-5 py-24 mx-auto">
-  {category=="" && 
+    
+  {step=="one" && 
          <>
          <div className="flex flex-col text-center w-full mb-12">
         <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Select Category</h1>
@@ -55,7 +65,7 @@ export default function Page(){
         {categorylist.map((item,index)=>{
           return (
             <div className="p-2" key={index}>
-              <button onClick={()=>{setCategory(item)}} className=" w-full mx-auto  text-gray-700 bg-gray-200 border-0 py-1 px-4 focus:outline-none hover:bg-gray-300 rounded capitalize">{item}</button>
+              <button onClick={()=>{setCategoryVal(item)}} className=" w-full mx-auto  text-gray-700 bg-gray-200 border-0 py-1 px-4 focus:outline-none hover:bg-gray-300 rounded capitalize">{item}</button>
             </div>
           )
         }) }
@@ -63,7 +73,7 @@ export default function Page(){
          </>
          
          }
-  {category!="" &&
+  {step=="two" &&
         <>
         <div className="flex flex-col text-center w-full mb-12">
         <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Fill in location</h1>
@@ -71,7 +81,7 @@ export default function Page(){
         </div>
         <div className="lg:w-1/2 md:w-2/3 mx-auto flex felx-row">
          <span className="btnflex mx-auto  text-gray-700 capitalize ">{category}</span>
-         <button onClick={()=>{setCategory("")}} className="btnflex mx-auto text-sm  text-gray-700 bg-gray-200 border-0 py-1 px-4 focus:outline-none hover:bg-gray-300 rounded">{"Change Category"}</button>
+         <button onClick={()=>{setCategory(""); setStep("one")}} className="btnflex mx-auto text-sm  text-gray-700 bg-gray-200 border-0 py-1 px-4 focus:outline-none hover:bg-gray-300 rounded">{"Change Category"}</button>
         </div>
          
         <div className="flex flex-row items-center text-center w-full my-4 ">
@@ -85,10 +95,37 @@ export default function Page(){
             </div>
             
           </div>
-          <button onClick={()=>{setCategory("")}} className={buttonClass}>{"Save Location"}</button>
+          <button onClick={setAddressVal} className={buttonClass}>{"Save Location"}</button>
 
         </>
     }
+     {step=="three" &&
+        <>
+        <div className="flex flex-col text-center w-full mb-12">
+        <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Fill in location</h1>
+        <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Provide location for the {category}. This will help you to reach correct audiance.</p>
+        </div>
+        <div className="flex flex-col text-center w-full mb-1">
+            <textarea placeholder="Post your requirment" className={inputClass} rows={5} spellCheck="true" lang="en" onChange={(e) => { setDescription(e.target.value) }}></textarea>
+          </div>
+          <div className="flex flex-row text-center w-full mb-1">
+            <select className={inputClass} onChange={(e)=>setMode(e.target.value)}>
+              <option>Select where to reach you</option>
+            {
+              modelist.map((item,index)=>{
+                return (<option value={item} key={index}>
+                  {item}
+                </option>)
+              })
+            }
+            </select>
+            <input placeholder="Required value" className={inputClass} onChange={(e)=>{setModevalue(e.target.value)}} value={modevalue} />
+          </div>
+          <button onClick={()=>{setAddressVal}} className={buttonClass}>{"Save Location"}</button>
+
+        </>
+    }
+    
  </div>
 </section>
 
