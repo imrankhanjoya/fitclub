@@ -55,7 +55,7 @@ export default function Page(){
         {categorylist.map((item,index)=>{
           return (
             <div className="p-2" key={index}>
-              <button onClick={()=>{setCategory(item)}} className="btnflex mx-auto  text-gray-700 bg-gray-200 border-0 py-1 px-4 focus:outline-none hover:bg-gray-300 rounded capitalize">{item}</button>
+              <button onClick={()=>{setCategory(item)}} className=" w-full mx-auto  text-gray-700 bg-gray-200 border-0 py-1 px-4 focus:outline-none hover:bg-gray-300 rounded capitalize">{item}</button>
             </div>
           )
         }) }
