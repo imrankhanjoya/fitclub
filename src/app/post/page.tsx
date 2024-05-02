@@ -16,6 +16,7 @@ export default function Page(){
     const [region, setRegion] = useState('')
     const [mode, setMode] = useState('')
     const [modevalue, setModevalue] = useState('')
+    const [currency, setCurrency] = useState('')
 
     
     const generate_embbed = async()=>{
@@ -31,6 +32,7 @@ export default function Page(){
       setCountry(res.data.country_name)
       setRegion(res.data.region)
       setCity(res.data.city)
+      setCurrency(res.data.currency)
     });
 
     }
@@ -104,6 +106,12 @@ export default function Page(){
         <div className="flex flex-col text-center w-full mb-12">
         <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Fill in location</h1>
         <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Provide location for the {category}. This will help you to reach correct audiance.</p>
+        </div>
+
+        <div className="flex flex-row text-center w-full mb-1">
+        <input placeholder="Enter currency" className={inputClass} onChange={(e)=>{setCurrency(e.target.value)}} value={currency} />
+        <input placeholder="Enter price/rate/charges" className={inputClass} onChange={(e)=>{setModevalue(e.target.value)}} value={modevalue} />
+
         </div>
         <div className="flex flex-col text-center w-full mb-1">
             <textarea placeholder="Post your requirment" className={inputClass} rows={5} spellCheck="true" lang="en" onChange={(e) => { setDescription(e.target.value) }}></textarea>
