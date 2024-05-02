@@ -75,11 +75,11 @@ export default function Page(){
         </div>
          
         <div className="flex flex-row text-center w-full mb-1 ">
-            <div className="flex lg:flex-row flex-col w-full">
+            <div className="flex lg:flex-row flex-col w-full space-x-1">
             <input placeholder="Address line" className={inputClass} onChange={(e)=>{setAddress(e.target.value)}} value={address} />
             <input placeholder="Region" className={inputClass} onChange={(e)=>{setRegion(e.target.value)}} value={region} />
             </div>
-            <div className="flex lg:flex-row flex-col w-full">
+            <div className="flex lg:flex-row flex-col w-full space-x-1">
             <input placeholder="City" className={inputClass} onChange={(e)=>{setCity(e.target.value)}} value={city} />
             <input placeholder="Country" className={inputClass} onChange={(e)=>{setCountry(e.target.value)}} value={country} />
             </div>
