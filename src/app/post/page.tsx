@@ -47,8 +47,13 @@ export default function Page(){
         <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Contact Us</h1>
         <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify.</p>
         </div>
-        <div className="lg:w-1/2 md:w-2/3 mx-auto">
-         <button onClick={()=>{setCategory("")}} className="btnflex mx-auto  text-gray-700 bg-gray-200 border-0 py-1 px-4 focus:outline-none hover:bg-gray-300 rounded">{category}</button>
+        <div className="lg:w-1/2 md:w-2/3 mx-auto flex felx-row">
+         <span className="btnflex mx-auto  text-gray-700 capitalize ">{category}</span>
+         <button onClick={()=>{setCategory("")}} className="btnflex mx-auto text-sm  text-gray-700 bg-gray-200 border-0 py-1 px-4 focus:outline-none hover:bg-gray-300 rounded">{"Change Category"}</button>
+        </div>
+        <div className="lg:w-1/2 md:w-2/3 mx-auto flex felx-row">
+         <span className="btnflex mx-auto  text-gray-700 capitalize ">{category}</span>
+         <button onClick={()=>{setCategory("")}} className="btnflex mx-auto text-sm  text-gray-700 bg-gray-200 border-0 py-1 px-4 focus:outline-none hover:bg-gray-300 rounded">{"Change Category"}</button>
         </div>
         </>
     }
